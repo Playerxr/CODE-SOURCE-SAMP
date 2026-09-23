@@ -8,17 +8,17 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.xyron.game"
+        applicationId "com.afrp.game"
         minSdk 21
         targetSdk 28
         versionCode 1
-        versionName "0.0.1"
+        versionName "1.0.0 AFRP"
 
         multiDexEnabled true
-        manifestPlaceholders = [appLabel: "News RP"]
+        manifestPlaceholders = [appLabel: "AFRP"]
         buildConfigField "String", "XYRON_APK_ROLE", "\"all\""
-        buildConfigField "String", "XYRON_GAME_PACKAGE", "\"com.xyron.game\""
-        buildConfigField "String", "XYRON_TOOLS_PACKAGE", "\"com.xyron.game\""
+        buildConfigField "String", "XYRON_GAME_PACKAGE", "\"com.afrp.game\""
+        buildConfigField "String", "XYRON_TOOLS_PACKAGE", "\"com.afrp.game\""
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -67,7 +67,7 @@ android {
     buildFeatures {
         buildConfig true
     }
-    namespace 'com.xyron.game'
+    namespace 'com.afrp.game'
 }
 
 dependencies {

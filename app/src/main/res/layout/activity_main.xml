@@ -288,7 +288,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.xyron.game.launcher.util.ViewPagerWithoutSwipe
+    <com.afrp.game.launcher.util.ViewPagerWithoutSwipe
         android:id="@+id/fragment_place"
         android:layout_width="0dp"
         android:layout_height="0dp"

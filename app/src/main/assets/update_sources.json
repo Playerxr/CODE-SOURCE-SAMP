@@ -13,7 +13,7 @@
       "id": "lite",
       "label": "Data Lite",
       "huggingface": {
-        "repo_id": "dfdffdfdfdfd/gta-data-files-universal",
+        "repo_id": "prsk7/afrp-data",
         "repo_type": "dataset",
         "revision": "main",
         "client_config_path": "client_config.json",
@@ -24,7 +24,7 @@
       "id": "full",
       "label": "Data Full",
       "huggingface": {
-        "repo_id": "dfdffdfdfdfd/gta-data-files-universal",
+        "repo_id": "prsk7/afrp-data",
         "repo_type": "dataset",
         "revision": "main",
         "client_config_path": "client_config.json",

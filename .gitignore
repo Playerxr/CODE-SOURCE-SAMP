@@ -33,9 +33,7 @@ xyron_*.png
 app/*.jks
 app/*.keystore
 
-# Prebuilt binaries: keep local only when building a runnable APK.
-# Do not publish these in a source-only release.
-app/src/main/jniLibs/**/*.so
+# Prebuilt binaries: REQUIRED to build a runnable APK (libSAMP.so, libGTASA.so,
+# sampmobilecef aar...). They are tracked in git so GitHub Actions can build.
+# Only exception: compiled NDK output (jni/libs, jni/obj) stays local.
 jni/**/*.a
-app/libs/*.aar
-app/libs/*.jar

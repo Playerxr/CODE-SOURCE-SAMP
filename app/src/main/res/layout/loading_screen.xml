@@ -58,12 +58,14 @@
                 app:srcCompat="@drawable/news_rp_logo" />
         </FrameLayout>
 
-        <ImageView
-            android:layout_width="184dp"
-            android:layout_height="40dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:adjustViewBounds="true"
-            app:srcCompat="@drawable/news_rp_wordmark" />
+            android:fontFamily="@font/montserrat_black"
+            android:text="AFRP"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
 
         <TextView
             android:layout_width="wrap_content"
