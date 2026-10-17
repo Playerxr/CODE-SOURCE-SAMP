@@ -158,37 +158,37 @@ public class HomeFragment extends Fragment {
 
         if (!hasGameData) {
             nextStepAction = NEXT_STEP_UPDATE_DATA;
-            readinessTitle.setText("Dados pendentes");
-            readinessBody.setText("Baixe os arquivos do jogo");
-            nextStepButton.setText("Baixar dados");
+            readinessTitle.setText("Modpack requis");
+            readinessBody.setText("Placez le modpack dans /storage/emulated/0/GTA/");
+            nextStepButton.setText("Verifier les fichiers");
             return;
         }
 
         if (!hasServers) {
             nextStepAction = NEXT_STEP_ADD_SERVER;
-            readinessTitle.setText("Falta servidor");
-            readinessBody.setText("Adicione um IP:PORTA");
-            nextStepButton.setText("Adicionar servidor");
+            readinessTitle.setText("Serveur requis");
+            readinessBody.setText("Ajoutez l'IP:PORT");
+            nextStepButton.setText("Ajouter un serveur");
             return;
         }
 
         if (!hasSelectedServer) {
             nextStepAction = NEXT_STEP_CHOOSE_SERVER;
-            readinessTitle.setText("Escolha o servidor");
-            readinessBody.setText("Defina o IP ativo");
-            nextStepButton.setText("Escolher servidor");
+            readinessTitle.setText("Choisir le serveur");
+            readinessBody.setText("Selectionnez le serveur actif");
+            nextStepButton.setText("Choisir un serveur");
             return;
         }
 
         nextStepAction = NEXT_STEP_PLAY;
         if (isLauncherRole()) {
-            readinessTitle.setText("Servidor pronto");
-            readinessBody.setText("Abre pelo APK Game");
-            nextStepButton.setText("Abrir Game");
+            readinessTitle.setText("Serveur pret");
+            readinessBody.setText("Ouvrir avec le jeu");
+            nextStepButton.setText("Ouvrir le jeu");
         } else {
-            readinessTitle.setText("Tudo pronto");
-            readinessBody.setText("Pode entrar no jogo");
-            nextStepButton.setText("Jogar agora");
+            readinessTitle.setText("NOVA AFRP");
+            readinessBody.setText("Pret a jouer");
+            nextStepButton.setText("Jouer maintenant");
         }
     }
 
@@ -199,9 +199,12 @@ public class HomeFragment extends Fragment {
 
         MainActivity activity = (MainActivity) getActivity();
         if (nextStepAction == NEXT_STEP_UPDATE_DATA) {
-            Intent intent = new Intent(requireContext(), UpdateActivity.class);
-            intent.putExtra("mode", UpdateActivity.UpdateMode.GameDataUpdate.name());
-            startActivity(intent);
+            if (GameDataVerifier.hasRequiredGameData(requireContext())) {
+                updateSelectedServer();
+                android.widget.Toast.makeText(getContext(), "Fichiers du modpack detectes !", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                android.widget.Toast.makeText(getContext(), "Veuillez copier le modpack dans /storage/emulated/0/GTA/", android.widget.Toast.LENGTH_LONG).show();
+            }
             return;
         }
 

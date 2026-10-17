@@ -271,10 +271,10 @@ public class SplashActivity extends SampActivity {
         TextView primaryButton = dialogView.findViewById(R.id.update_prompt_primary);
         TextView secondaryButton = dialogView.findViewById(R.id.update_prompt_secondary);
 
-        titleView.setText("Download indisponivel");
-        bodyView.setText("Os arquivos do jogo ainda nao estao no aparelho e a fonte de download nao respondeu. Tente novamente ou configure o update_sources.json com sua URL do Hugging Face.");
-        primaryButton.setText("Tentar de novo");
-        secondaryButton.setText("Fechar");
+        titleView.setText("Modpack NOVA AFRP non detecte");
+        bodyView.setText("Placez les fichiers du jeu dans le dossier :\n/storage/emulated/0/GTA/\n\nUne fois les fichiers copies, appuyez sur Re-verifier.");
+        primaryButton.setText("Re-verifier");
+        secondaryButton.setText("Ouvrir le Launcher");
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -290,11 +290,18 @@ public class SplashActivity extends SampActivity {
 
         primaryButton.setOnClickListener(v -> {
             dialog.dismiss();
-            checkUpdate();
+            if (hasRequiredGameData()) {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Dossier /storage/emulated/0/GTA/ toujours incomplet.", Toast.LENGTH_LONG).show();
+                dialog.show();
+            }
         });
 
         secondaryButton.setOnClickListener(v -> {
             dialog.dismiss();
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         });
 

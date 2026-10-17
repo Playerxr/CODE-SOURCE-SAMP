@@ -81,16 +81,15 @@ public class WarMedia extends WarGamepad {
     public native void setTouchSenseFilepath(String path);
 
     public String GetGameBaseDirectory() {
-        File external = getExternalFilesDir(null);
-        File base = external != null ? external : getFilesDir();
-        String absolutePath = base.getAbsolutePath();
-        int androidIndex = absolutePath.indexOf(File.separator + "Android");
-        if (androidIndex > 0) {
-            baseDirectoryRoot = absolutePath.substring(0, androidIndex);
-        } else {
-            baseDirectoryRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File gtaDir = new File(Environment.getExternalStorageDirectory(), "GTA");
+        if (!gtaDir.exists()) {
+            try {
+                gtaDir.mkdirs();
+            } catch (Exception ignored) {
+            }
         }
-        return ensureTrailingSlash(base.getAbsolutePath());
+        baseDirectoryRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
+        return ensureTrailingSlash(gtaDir.getAbsolutePath());
     }
 
     public boolean isNetworkAvailable() {

@@ -121,6 +121,7 @@ public final class ServerConfigManager {
             prepareSettingsFile(file);
             Wini wini = new Wini(file);
             writeServer(wini, host, port);
+            StorageHelper.syncSettingsJson(context, host, port, null);
             return true;
         } catch (IOException e) {
             Log.e(TAG, "Failed to persist selected server at " + file.getAbsolutePath(), e);
@@ -354,10 +355,7 @@ public final class ServerConfigManager {
     }
 
     private static File getSettingsFile(Context context) {
-        if (context == null || context.getExternalFilesDir(null) == null) {
-            return null;
-        }
-        return new File(context.getExternalFilesDir(null), SETTINGS_PATH);
+        return StorageHelper.getSettingsFile(context);
     }
 
     private static void prepareSettingsFile(File file) throws IOException {

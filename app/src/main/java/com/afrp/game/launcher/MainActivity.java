@@ -36,6 +36,7 @@ import com.afrp.game.launcher.util.HostShellEngine;
 import com.afrp.game.launcher.util.SampQueryApi;
 import com.afrp.game.launcher.util.SAMPServerInfo;
 import com.afrp.game.launcher.util.ServerConfigManager;
+import com.afrp.game.launcher.util.StorageHelper;
 import com.afrp.game.launcher.util.ViewPagerWithoutSwipe;
 import com.afrp.game.main.SAMP;
 
@@ -185,10 +186,9 @@ public class MainActivity extends SampActivity {
         }
 
         if (preparation.requiresDataUpdate) {
-            Intent intent = new Intent(this, UpdateActivity.class);
-            intent.putExtra("mode", UpdateActivity.UpdateMode.GameDataUpdate.name());
-            startActivity(intent);
-            finish();
+            launchInProgress = false;
+            setLaunchControlsEnabled(true);
+            Toast.makeText(this, "Modpack introuvable. Copiez les fichiers dans /storage/emulated/0/GTA/", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -249,11 +249,7 @@ public class MainActivity extends SampActivity {
     }
 
     private String readConfiguredNickname() {
-        if (getExternalFilesDir(null) == null) {
-            return "";
-        }
-
-        File settingsFile = new File(getExternalFilesDir(null), "SAMP/settings.ini");
+        File settingsFile = StorageHelper.getSettingsFile(this);
         if (!settingsFile.exists()) {
             return "";
         }

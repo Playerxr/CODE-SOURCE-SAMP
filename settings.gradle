@@ -5,6 +5,6 @@ pluginManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Medusa"
+rootProject.name = "NOVA AFRP"
 include ':app'
 include ':prdownloader'

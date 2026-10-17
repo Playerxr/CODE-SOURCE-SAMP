@@ -12,10 +12,10 @@ android {
         minSdk 21
         targetSdk 28
         versionCode 1
-        versionName "1.0.0 AFRP"
+        versionName "1.0.0 NOVA AFRP"
 
         multiDexEnabled true
-        manifestPlaceholders = [appLabel: "AFRP"]
+        manifestPlaceholders = [appLabel: "NOVA AFRP"]
         buildConfigField "String", "XYRON_APK_ROLE", "\"all\""
         buildConfigField "String", "XYRON_GAME_PACKAGE", "\"com.afrp.game\""
         buildConfigField "String", "XYRON_TOOLS_PACKAGE", "\"com.afrp.game\""

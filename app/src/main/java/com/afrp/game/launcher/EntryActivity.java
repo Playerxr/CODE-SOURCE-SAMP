@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.afrp.game.launcher.util.ConfigValidator;
 import com.afrp.game.launcher.util.ServerConfigManager;
+import com.afrp.game.launcher.util.StorageHelper;
 
 import org.ini4j.Wini;
 
@@ -76,7 +77,7 @@ public class EntryActivity extends SampActivity {
     }
 
     private void saveNickname(String nickname) {
-        File settingsFile = new File(getExternalFilesDir(null), "SAMP/settings.ini");
+        File settingsFile = StorageHelper.getSettingsFile(this);
         File parent = settingsFile.getParentFile();
         if (parent != null && !parent.exists() && !parent.mkdirs()) {
             Log.w(TAG, "Could not create settings directory.");
@@ -92,6 +93,7 @@ public class EntryActivity extends SampActivity {
             Wini wini = new Wini(settingsFile);
             wini.put("client", "name", nickname);
             wini.store();
+            StorageHelper.syncSettingsJson(this, null, 0, nickname);
         } catch (IOException e) {
             Log.e(TAG, "Could not save incoming nickname.", e);
         }

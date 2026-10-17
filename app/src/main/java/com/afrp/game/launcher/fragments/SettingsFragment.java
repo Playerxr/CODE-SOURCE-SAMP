@@ -28,6 +28,7 @@ import com.afrp.game.launcher.SplashActivity;
 import com.afrp.game.launcher.util.ButtonAnimator;
 import com.afrp.game.launcher.util.ServerConfigManager;
 import com.afrp.game.launcher.util.SharedPreferenceCore;
+import com.afrp.game.launcher.util.StorageHelper;
 import com.afrp.game.launcher.util.Util;
 
 import org.ini4j.Wini;
@@ -127,11 +128,11 @@ public class SettingsFragment extends Fragment {
     }
 
     private void openSettingsFile() {
-        if (getActivity() == null || getActivity().getExternalFilesDir(null) == null) {
+        if (getActivity() == null) {
             return;
         }
 
-        File file = new File(getActivity().getExternalFilesDir(null), "SAMP/settings.ini");
+        File file = StorageHelper.getSettingsFile(getActivity());
         try {
             if (!file.exists()) {
                 File parent = file.getParentFile();
@@ -223,7 +224,8 @@ public class SettingsFragment extends Fragment {
             return;
         }
 
-        Toast.makeText(getContext(), "Nome salvo no launcher e no arquivo do jogo.", Toast.LENGTH_SHORT).show();
+        StorageHelper.syncSettingsJson(getContext(), null, 0, nickname);
+        Toast.makeText(getContext(), "Nom sauvegarde avec succes.", Toast.LENGTH_SHORT).show();
         loadNickname();
     }
 
@@ -238,11 +240,11 @@ public class SettingsFragment extends Fragment {
         }
 
         if (isToolsRole()) {
-            Toast.makeText(getContext(), "Baixe ou reinstale a data pelo APK AFRP.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Placez le modpack AFRP dans /storage/emulated/0/GTA.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        File dir = new File(getActivity().getExternalFilesDir(null) + "/");
+        File dir = StorageHelper.getGtaDirectory(getActivity());
         Util.delete(dir);
         Intent intent = new Intent(getActivity(), EntryActivity.class);
         intent.putExtra(EntryActivity.EXTRA_FORCE_UPDATE_DATA, true);

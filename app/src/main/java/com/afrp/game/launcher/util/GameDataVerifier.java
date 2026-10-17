@@ -34,33 +34,42 @@ public final class GameDataVerifier {
     }
 
     public static boolean hasRequiredGameData(Context context) {
-        File externalFilesDir = context.getExternalFilesDir(null);
-        if (externalFilesDir == null) {
+        File gtaDir = StorageHelper.getGtaDirectory(context);
+        if (checkDirectoryHasData(gtaDir)) {
+            return true;
+        }
+
+        if (context != null && context.getExternalFilesDir(null) != null) {
+            return checkDirectoryHasData(context.getExternalFilesDir(null));
+        }
+
+        return false;
+    }
+
+    public static boolean checkDirectoryHasData(File baseDirectory) {
+        if (baseDirectory == null || !baseDirectory.exists() || !baseDirectory.isDirectory()) {
             return false;
         }
 
+        File checkDir = baseDirectory;
+        if (!new File(checkDir, "data").exists() && new File(checkDir, "files/data").exists()) {
+            checkDir = new File(checkDir, "files");
+        }
+
         for (String relativePath : REQUIRED_DIRECTORIES) {
-            File directory = new File(externalFilesDir, relativePath);
+            File directory = new File(checkDir, relativePath);
             if (!directory.exists() || !directory.isDirectory()) {
                 return false;
             }
         }
 
-        for (String relativePath : REQUIRED_FILES) {
-            if (!hasNonEmptyFile(externalFilesDir, relativePath)) {
-                return false;
-            }
+        if (!hasNonEmptyFile(checkDir, "texdb/gta3.img") && !hasNonEmptyFile(checkDir, "data/gta.dat")) {
+            return false;
         }
 
-        return hasTextureSet(externalFilesDir, "texdb/gta3/gta3")
-                && hasTextureSet(externalFilesDir, "texdb/gta_int/gta_int")
-                && hasTextureSet(externalFilesDir, "texdb/menu/menu")
-                && hasTextureSet(externalFilesDir, "texdb/mobile/mobile")
-                && hasTextureSet(externalFilesDir, "texdb/samp/samp")
-                && hasTextureSet(externalFilesDir, "texdb/txd/txd")
-                && hasNonEmptyFile(externalFilesDir, "texdb/player/player.pvr.dat")
-                && hasNonEmptyFile(externalFilesDir, "texdb/player/player.pvr.tmb")
-                && hasNonEmptyFile(externalFilesDir, "texdb/player/player.pvr.toc");
+        return hasNonEmptyFile(checkDir, "SAMP/main.scm")
+                || hasNonEmptyFile(checkDir, "SAMP/settings.json")
+                || hasNonEmptyFile(checkDir, "SAMP/settings.ini");
     }
 
     private static boolean hasTextureSet(File baseDirectory, String basePath) {

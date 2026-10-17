@@ -25,6 +25,7 @@ import com.downloader.PRDownloaderConfig;
 import com.downloader.Progress;
 import com.afrp.game.launcher.data.FilesData;
 import com.afrp.game.launcher.util.GameDataVerifier;
+import com.afrp.game.launcher.util.StorageHelper;
 import com.afrp.game.launcher.util.UpdateSourceResolver;
 import com.afrp.game.launcher.util.Util;
 
@@ -519,7 +520,7 @@ public class UpdateService extends Service {
             return;
         }
 
-        String rootPath = getExternalFilesDir(null) + "/";
+        String rootPath = StorageHelper.getGtaDirectory(this).getAbsolutePath() + "/";
         File file = new File(rootPath + fileData.getPath());
         if (isCompleteFile(file, fileData.getSize())) {
             return;
@@ -724,7 +725,7 @@ public class UpdateService extends Service {
         while(intRef.element<arrayList.size()) {
             mDownloadingStatus = true;
 
-            String string = getExternalFilesDir(null) + "/" + arrayList.get(intRef.element);
+            String string = StorageHelper.getGtaDirectory(this).getAbsolutePath() + "/" + arrayList.get(intRef.element);
 
             //Log.d("x1y2z", "Update file path: " + string.replace((CharSequence) arrayList1.get(intRef.element), "") + ", Name:" + arrayList1.get(intRef.element));
 

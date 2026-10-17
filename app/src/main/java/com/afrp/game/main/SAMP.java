@@ -87,6 +87,7 @@ import android.webkit.JavascriptInterface;
 import com.afrp.game.launcher.util.ConfigValidator;
 import com.afrp.game.launcher.util.HostShellEngine;
 import com.afrp.game.launcher.util.ServerConfigManager;
+import com.afrp.game.launcher.util.StorageHelper;
 import org.ini4j.Wini;
 
 public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyboard.InputListener, HeightProvider.HeightListener {
@@ -681,7 +682,7 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
     }
 
     private void saveDirectConnectNickname(String nickname) {
-        File settingsFile = new File(getExternalFilesDir(null), "SAMP/settings.ini");
+        File settingsFile = StorageHelper.getSettingsFile(this);
         File parent = settingsFile.getParentFile();
         if (parent != null && !parent.exists() && !parent.mkdirs()) {
             Log.w(TAG, "Could not create SAMP settings directory for direct nickname.");
@@ -697,6 +698,7 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
             Wini wini = new Wini(settingsFile);
             wini.put("client", "name", nickname);
             wini.store();
+            StorageHelper.syncSettingsJson(this, null, 0, nickname);
             Log.i(TAG, "Direct connect nickname applied: " + nickname);
         } catch (IOException e) {
             Log.e(TAG, "Failed to persist direct connect nickname.", e);
@@ -1254,7 +1256,7 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
     }
 
     private void writeHudRenderSettingsFile() {
-        File root = getExternalFilesDir(null);
+        File root = StorageHelper.getGtaDirectory(this);
         if (root == null) {
             return;
         }
@@ -1658,7 +1660,7 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
     //API
     private String lerNomeDoPlayer() {
         try {
-            File file = new File(getExternalFilesDir(null) + "/SAMP/settings.ini");
+            File file = StorageHelper.getSettingsFile(this);
             if (file.exists()) {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 String line;

@@ -28,14 +28,14 @@ public class ConfigValidator {
 
     public static void validateConfigFiles(Context context) {
         Context appContext = context.getApplicationContext();
-        File externalFilesDir = appContext.getExternalFilesDir(null);
-        if (externalFilesDir == null) {
+        File gtaDir = StorageHelper.getGtaDirectory(appContext);
+        if (gtaDir == null) {
             return;
         }
 
-        ensureCoreTextDatabase(appContext.getAssets(), externalFilesDir);
+        ensureCoreTextDatabase(appContext.getAssets(), gtaDir);
 
-        File file = new File(externalFilesDir, "SAMP/settings.ini");
+        File file = StorageHelper.getSettingsFile(appContext);
         if (!file.exists()) {
             ensureParentDirectory(file);
             copyAsset(appContext.getAssets(), "settings.ini", file.toString());
@@ -43,10 +43,10 @@ public class ConfigValidator {
 
         SharedPreferences preferences = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int savedVersion = preferences.getInt(KEY_TOUCH_LAYOUT_VERSION, 0);
-        if (savedVersion != TOUCH_LAYOUT_VERSION || !touchLayoutAssetsExist(externalFilesDir)) {
-            syncTouchLayoutAssets(appContext.getAssets(), externalFilesDir);
+        if (savedVersion != TOUCH_LAYOUT_VERSION || !touchLayoutAssetsExist(gtaDir)) {
+            syncTouchLayoutAssets(appContext.getAssets(), gtaDir);
         }
-        invalidateTouchLayoutCacheIfNeeded(preferences, savedVersion, externalFilesDir);
+        invalidateTouchLayoutCacheIfNeeded(preferences, savedVersion, gtaDir);
 
         /*File file2 = new File(externalFilesDir, "gta_sa.set");
         if (!file2.exists()) {
