@@ -20,11 +20,6 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Accept licenses & install components
-        run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "platforms;android-33" "build-tools;33.0.2" "platform-tools"
-
       - name: Build debug APK
         run: |
           chmod +x gradlew
