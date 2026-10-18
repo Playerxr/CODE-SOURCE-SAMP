@@ -20,11 +20,9 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android platform 33 + build-tools
+      - name: Accept licenses & install components
         run: |
+          yes | sdkmanager --licenses || true
           sdkmanager "platforms;android-33" "build-tools;33.0.2" "platform-tools"
 
       - name: Build debug APK
