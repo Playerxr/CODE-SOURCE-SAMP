@@ -2,7 +2,7 @@ package com.raiferoleplay.game.cef;
 
 import android.util.Log;
 
-import com.afrp.game.main.SAMP;
+import com.xyron.game.main.SAMP;
 
 /**
  * Compatibility bridge for native builds that still resolve the legacy

@@ -46,7 +46,7 @@ import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.afrp.game.R;
+import com.xyron.game.R;
 
 import java.io.FileInputStream;
 import java.io.IOException;

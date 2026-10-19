@@ -8,7 +8,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.afrp.game"
+        applicationId "com.xyron.game"
         minSdk 21
         targetSdk 28
         versionCode 1
@@ -17,8 +17,8 @@ android {
         multiDexEnabled true
         manifestPlaceholders = [appLabel: "NOVA AFRP"]
         buildConfigField "String", "XYRON_APK_ROLE", "\"all\""
-        buildConfigField "String", "XYRON_GAME_PACKAGE", "\"com.afrp.game\""
-        buildConfigField "String", "XYRON_TOOLS_PACKAGE", "\"com.afrp.game\""
+        buildConfigField "String", "XYRON_GAME_PACKAGE", "\"com.xyron.game\""
+        buildConfigField "String", "XYRON_TOOLS_PACKAGE", "\"com.xyron.game\""
 
         ndk {
             abiFilters 'armeabi-v7a'
@@ -67,7 +67,7 @@ android {
     buildFeatures {
         buildConfig true
     }
-    namespace 'com.afrp.game'
+    namespace 'com.xyron.game'
 }
 
 dependencies {
