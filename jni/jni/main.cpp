@@ -433,11 +433,7 @@ int _curlWriteFunc(char* data, size_t size, size_t nmemb, std::string* buffer)
 
 void SkipRockStarLegal()
 {
-	uintptr_t adr = ARMHook::getLibraryAddress("libSCAnd.so");
-	if (adr == 0) return;
-
-	ARMHook::unprotect(adr + /*0x20C670*/0x31C149);
-	*(bool*)(adr + /*0x20C670*/0x31C149) = true;
+	// SkipRockStarLegal disabled: invalid offset into libSCAnd.so caused SEGV_ACCERR crash on modern Android
 }
 
 void* Init(void*)
