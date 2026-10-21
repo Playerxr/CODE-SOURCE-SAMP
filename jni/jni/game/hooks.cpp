@@ -110,17 +110,25 @@ int OS_FileOpen_hook(int r0, uintptr_t handle, char* name, int r3)
 
 	FLog("OS_FileOpen: %s", name);
 
-	if (!strncmp(name, "data\\script\\mainV1.scm", 22)) {
-		FLog("Loading mainV1.scm..");
+	if (!strncasecmp(name, "data\\script\\main", 16) || !strncasecmp(name, "data/script/main", 16)) {
+		FLog("Loading main.scm..");
 		sprintf(path, "SAMP\\main.scm");
 		name = path;
 		goto ret;
 	}
 
-	if (!strncmp(name, "DATA\\SCRIPT\\SCRIPTV1.IMG", 24))
+	if (!strncasecmp(name, "DATA\\SCRIPT\\SCRIPT", 18) || !strncasecmp(name, "DATA/SCRIPT/SCRIPT", 18))
 	{
-		FLog("Loading scriptV1.img..");
+		FLog("Loading script.img..");
 		sprintf(path, "SAMP\\script.img");
+		name = path;
+		goto ret;
+	}
+
+	if (!strncasecmp(name, "MODELS\\CUTSCENE.IMG", 19) || !strncasecmp(name, "MODELS/CUTSCENE.IMG", 19))
+	{
+		FLog("Loading cutscene.img dummy..");
+		sprintf(path, "models\\cutscene.img");
 		name = path;
 		goto ret;
 	}
@@ -227,6 +235,28 @@ int OS_FileOpen_hook(int r0, uintptr_t handle, char* name, int r3)
 
 	ret:
 	return OS_FileOpen(r0, handle, name, r3);
+}
+
+/* =============================================================================== */
+
+int (*OS_FileSetPosition)(void* file, int pos) = nullptr;
+int OS_FileSetPosition_hook(void* file, int pos)
+{
+	if (!file)
+	{
+		return 0;
+	}
+	return OS_FileSetPosition(file, pos);
+}
+
+int (*OS_FileRead)(void* file, void* buf, int size) = nullptr;
+int OS_FileRead_hook(void* file, void* buf, int size)
+{
+	if (!file)
+	{
+		return -1;
+	}
+	return OS_FileRead(file, buf, size);
 }
 
 /* =============================================================================== */
@@ -2377,6 +2407,8 @@ void InstallGlobalHooks()
 	ARMHook::installHook(g_libGTASA + 0x26BF20, (uintptr_t)ANDRunThread_hook, (uintptr_t*)& ANDRunThread);
 	// filesystem
 	ARMHook::installPLTHook(g_libGTASA + 0x6753A4, (uintptr_t)OS_FileOpen_hook, (uintptr_t*)&OS_FileOpen);
+	ARMHook::installPLTHook(g_libGTASA + 0x6736C8, (uintptr_t)OS_FileSetPosition_hook, (uintptr_t*)&OS_FileSetPosition);
+	ARMHook::installPLTHook(g_libGTASA + 0x674CD0, (uintptr_t)OS_FileRead_hook, (uintptr_t*)&OS_FileRead);
 	// custom ZIP archive
 	ARMHook::installPLTHook(g_libGTASA + 0x66FF40, (uintptr_t)CFileMgr_Initialise_hook, (uintptr_t*)&CFileMgr_Initialise);
 	// SAMP IMG archive
