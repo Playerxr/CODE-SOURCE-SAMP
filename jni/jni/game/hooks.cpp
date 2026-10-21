@@ -2400,6 +2400,9 @@ void InstallWidgetHooks()
 
 void InstallGlobalHooks()
 {
+	// bypass ValidateVersion DRM / checksum infinite loop
+	ARMHook::makeRET(g_libGTASA + 0x46F6E4);
+
 	//ARMHook::installHook(g_libGTASA + 0x22F2E8, (uintptr_t) mpg123_param_hook, (uintptr_t*)&mpg123_param);
 	//ARMHook::installPLTHook(g_libGTASA + 0x671B20, (uintptr_t)LIB_PointerGetButton_hook, (uintptr_t*)& LIB_PointerGetButton);
 	ARMHook::installPLTHook(g_libGTASA + 0x670268, (uintptr_t)CWorld__FindPlayerSlotWithPedPointer_hook, (uintptr_t*)&CWorld__FindPlayerSlotWithPedPointer);
