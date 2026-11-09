@@ -250,7 +250,7 @@ public class SplashActivity extends SampActivity {
         }
 
         if (!granted) {
-            Toast.makeText(this, "Permissoes nao concedidas.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Permissions non accordees.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -271,7 +271,7 @@ public class SplashActivity extends SampActivity {
         TextView primaryButton = dialogView.findViewById(R.id.update_prompt_primary);
         TextView secondaryButton = dialogView.findViewById(R.id.update_prompt_secondary);
 
-        titleView.setText("Modpack NOVA AFRP non detecte");
+        titleView.setText("Modpack Nova RP non detecte");
         bodyView.setText("Placez les fichiers du jeu dans le dossier :\n/storage/emulated/0/GTA/\n\nUne fois les fichiers copies, appuyez sur Re-verifier.");
         primaryButton.setText("Re-verifier");
         secondaryButton.setText("Ouvrir le Launcher");

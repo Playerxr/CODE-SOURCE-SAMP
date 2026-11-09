@@ -496,7 +496,7 @@ public final class LocalHostManager {
 
     private static String buildReadme(File rootDir) {
         String basePath = rootDir == null ? "Android/data/.../files/LocalHost" : rootDir.getAbsolutePath();
-        return "Host local experimental do launcher AFRP.\n"
+        return "Host local experimental do launcher Nova RP.\n"
                 + "\n"
                 + "O launcher prepara a base do servidor em:\n"
                 + basePath + "\n"
@@ -514,7 +514,7 @@ public final class LocalHostManager {
                 + "rcon_password changeme-local\n"
                 + "maxplayers 32\n"
                 + "port 7777\n"
-                + "hostname AFRP Local Host\n"
+                + "hostname Nova RP Local Host\n"
                 + "gamemode0 blank 1\n"
                 + "filterscripts\n"
                 + "announce 0\n"
@@ -608,7 +608,7 @@ public final class LocalHostManager {
                 + "  \"enable_query\": true,\n"
                 + "  \"language\": \"pt-BR\",\n"
                 + "  \"max_players\": 32,\n"
-                + "  \"name\": \"AFRP Local Host\",\n"
+                + "  \"name\": \"Nova RP Local Host\",\n"
                 + "  \"network\": {\n"
                 + "    \"bind\": \"\",\n"
                 + "    \"port\": 7777,\n"
@@ -639,7 +639,7 @@ public final class LocalHostManager {
                 + "cd \"$SERVER_DIR\" || exit 1\n"
                 + "chmod +x \"$SERVER_DIR\"/samp* \"$SERVER_DIR/" + COMPONENTS_DIR_NAME + "\"/*.so 2>/dev/null || true\n"
                 + "chmod +x \"$BIN_DIR\"/* 2>/dev/null || true\n"
-                + "echo \"AFRP Host: iniciando ambiente local em " + getLoopbackAddress() + "\"\n"
+                + "echo \"Nova RP Host: iniciando ambiente local em " + getLoopbackAddress() + "\"\n"
                 + "if [ -x \"$SERVER_DIR/samp-server\" ]; then\n"
                 + "  exec \"$SERVER_DIR/samp-server\"\n"
                 + "fi\n"
@@ -733,7 +733,7 @@ public final class LocalHostManager {
 
         if (content.contains("hostname Xyron Local Host")) {
             String migrated = content
-                    .replace("hostname Xyron Local Host", "hostname AFRP Local Host")
+                    .replace("hostname Xyron Local Host", "hostname Nova RP Local Host")
                     .replace("lanmode 1", "lanmode 0")
                     .replace("announce 1", "announce 0");
             if (!migrated.contains("announce 0")) {
@@ -753,11 +753,11 @@ public final class LocalHostManager {
         try {
             JSONObject root = parseExistingConfig(configFile);
             String name = root.optString("name");
-            if (!"Xyron Local Host".equals(name) && !"AFRP Local Host".equals(name)) {
+            if (!"Xyron Local Host".equals(name) && !"Nova RP Local Host".equals(name)) {
                 return;
             }
 
-            root.put("name", "AFRP Local Host");
+            root.put("name", "Nova RP Local Host");
             root.put("announce", false);
             root.put("enable_query", true);
 
@@ -911,7 +911,7 @@ public final class LocalHostManager {
             root.put("announce", false);
             root.put("enable_query", true);
             root.put("max_players", 32);
-            root.put("name", "AFRP Local Host");
+            root.put("name", "Nova RP Local Host");
 
             JSONObject network = root.optJSONObject("network");
             if (network == null) {

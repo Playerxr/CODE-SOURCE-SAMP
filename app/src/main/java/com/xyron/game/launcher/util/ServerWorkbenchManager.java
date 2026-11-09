@@ -39,7 +39,7 @@ public final class ServerWorkbenchManager {
         prepare(context);
 
         ServerSettings settings = new ServerSettings();
-        settings.hostname = "AFRP Local Host";
+        settings.hostname = "Nova RP Local Host";
         settings.website = "localhost";
         settings.language = "pt-BR";
         settings.maxPlayers = 32;
@@ -71,7 +71,7 @@ public final class ServerWorkbenchManager {
 
         String normalizedMainScript = normalizeScriptName(settings.mainScript, "blank");
         settings.mainScript = normalizedMainScript;
-        settings.hostname = fallback(settings.hostname, "AFRP Local Host");
+        settings.hostname = fallback(settings.hostname, "Nova RP Local Host");
         settings.website = fallback(settings.website, "localhost");
         settings.language = fallback(settings.language, "pt-BR");
         settings.maxPlayers = clampMaxPlayers(settings.maxPlayers);
@@ -603,11 +603,11 @@ public final class ServerWorkbenchManager {
 
     private static String friendlyLabel(String baseName) {
         if (TextUtils.isEmpty(baseName)) {
-            return "AFRP";
+            return "Nova RP";
         }
         String label = baseName.replace('_', ' ').trim();
         if (TextUtils.isEmpty(label)) {
-            return "AFRP";
+            return "Nova RP";
         }
         return Character.toUpperCase(label.charAt(0)) + label.substring(1);
     }

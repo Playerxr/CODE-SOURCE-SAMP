@@ -122,7 +122,7 @@ public final class HostShellEngine {
                     + "\n"
                     + "public OnGameModeInit()\n"
                     + "{\n"
-                    + "    SetGameModeText(\"AFRP Host\");\n"
+                    + "    SetGameModeText(\"Nova RP Host\");\n"
                     + "    ShowPlayerMarkers(PLAYER_MARKERS_MODE_OFF);\n"
                     + "    DisableInteriorEnterExits();\n"
                     + "    UsePlayerPedAnims();\n"
@@ -133,7 +133,7 @@ public final class HostShellEngine {
                     + "\n"
                     + "public OnPlayerConnect(playerid)\n"
                     + "{\n"
-                    + "    SendClientMessage(playerid, -1, \"Bem-vindo ao host SA-MP local do launcher AFRP.\");\n"
+                    + "    SendClientMessage(playerid, -1, \"Bem-vindo ao host SA-MP local do launcher Nova RP.\");\n"
                     + "    return 1;\n"
                     + "}\n"
                     + "\n"
@@ -1150,7 +1150,7 @@ public final class HostShellEngine {
         if (TextUtils.isEmpty(content)) {
             return false;
         }
-        return content.contains("AFRP Host")
+        return content.contains("Nova RP Host")
                 || content.contains("Xyron Host")
                 || content.contains("Bootstrap do host local")
                 || content.contains("Bootstrap SA-MP do host local");

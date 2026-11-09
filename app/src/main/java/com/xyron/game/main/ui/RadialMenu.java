@@ -19,22 +19,20 @@ import com.xyron.game.main.SAMP;
 import java.nio.charset.StandardCharsets;
 
 public class RadialMenu {
-    private static final int RADIAL_ICON_COLOR = 0xFFF59E0B;
-    private static final int RADIAL_TEXT_COLOR = 0xFFF6EAD8;
-    private static final int RADIAL_BACKDROP_COLOR = 0x66120B18;
-    private static final int RADIAL_TEXT_SHADOW = 0x70000000;
+    private static final int RADIAL_ICON_COLOR = 0xFFFFFFFF;
+    private static final int RADIAL_TEXT_COLOR = 0xFFE0E0E0;
+    private static final int RADIAL_BACKDROP_COLOR = 0xCC181818;
+    private static final int RADIAL_TEXT_SHADOW = 0x80000000;
     private ConstraintLayout radialLayout;
     private Activity activity;
     public static boolean menuVisible;
     private RadialVehicles mRadialVehicles;
-    //int RadinhoSom;
 
     native void sendCommand(byte[] str);
 
     public RadialMenu(Activity activity) {
         this.activity = activity;
 
-        // Inflar o layout radial
         ConstraintLayout layout = (ConstraintLayout) activity.getLayoutInflater().inflate(R.layout.radial, null);
         activity.addContentView(layout, new ConstraintLayout.LayoutParams(-1, -1));
 
@@ -42,14 +40,9 @@ public class RadialMenu {
         radialLayout.setVisibility(View.GONE);
         applyTheme();
 
-        //Som de radinho
-        //RadinhoSom = SAMP.soundPool.load(SAMP.getInstance(), R.raw.somradinho, 0);
-
-        // Configurar listeners para os botÃµes
         setListeners();
         menuVisible = false;
 
-        // Esconder o layout inicialmente
         Util.HideLayout(radialLayout, false);
     }
 
@@ -83,38 +76,43 @@ public class RadialMenu {
         radialLayout.setBackgroundColor(RADIAL_BACKDROP_COLOR);
 
         ImageView closeIcon = activity.findViewById(R.id.imageView31);
-        closeIcon.setImageTintList(ColorStateList.valueOf(RADIAL_TEXT_COLOR));
+        if (closeIcon != null) {
+            closeIcon.setImageTintList(ColorStateList.valueOf(RADIAL_TEXT_COLOR));
+        }
 
         for (int iconId : iconIds) {
             ImageView icon = activity.findViewById(iconId);
-            icon.setImageTintList(ColorStateList.valueOf(RADIAL_ICON_COLOR));
+            if (icon != null) {
+                icon.setImageTintList(ColorStateList.valueOf(RADIAL_ICON_COLOR));
+            }
         }
 
         for (int labelId : labelIds) {
             TextView label = activity.findViewById(labelId);
-            label.setTextColor(RADIAL_TEXT_COLOR);
-            label.setIncludeFontPadding(false);
-            label.setSingleLine(true);
-            label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9.25f);
-            label.setShadowLayer(10f, 0f, 0f, RADIAL_TEXT_SHADOW);
-            if (labelTypeface != null) {
-                label.setTypeface(labelTypeface);
+            if (label != null) {
+                label.setTextColor(RADIAL_TEXT_COLOR);
+                label.setIncludeFontPadding(false);
+                label.setSingleLine(true);
+                label.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9.25f);
+                label.setShadowLayer(10f, 0f, 0f, RADIAL_TEXT_SHADOW);
+                if (labelTypeface != null) {
+                    label.setTypeface(labelTypeface);
+                }
             }
         }
     }
 
     private void setListeners()
     {
-        // BotÃ£o central para fechar o menu
-        activity.findViewById(R.id.radial_close).setOnClickListener(view -> {
-            hide();
-        });
+        View closeBtn = activity.findViewById(R.id.radial_close);
+        if (closeBtn != null) {
+            closeBtn.setOnClickListener(view -> hide());
+        }
 
-        // Configurar cliques nos botÃµes radiais
         setRadialButtonClick(R.id.radial_button_00, 0);
         setRadialButtonClick(R.id.radial_button_01, 1);
         setRadialButtonClick(R.id.radial_button_02, 2);
-        setRadialButtonClick(R.id.radial_button_03, 3); // BotÃ£o 3 configurado
+        setRadialButtonClick(R.id.radial_button_03, 3);
         setRadialButtonClick(R.id.radial_button_04, 4);
         setRadialButtonClick(R.id.radial_button_05, 5);
         setRadialButtonClick(R.id.radial_button_06, 6);
@@ -125,8 +123,13 @@ public class RadialMenu {
 
     private void setRadialButtonClick(int buttonId, int actionId)
     {
-        activity.findViewById(buttonId).setOnClickListener(view -> {
-            if (actionId == 0)//Celular
+        View button = activity.findViewById(buttonId);
+        if (button == null) {
+            return;
+        }
+
+        button.setOnClickListener(view -> {
+            if (actionId == 0) // Téléphone
             {
                 hide();
                 if (activity instanceof SAMP) {
@@ -135,12 +138,12 @@ public class RadialMenu {
                 }
                 sendCommand("/c".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 1)//Gps
+            else if (actionId == 1) // GPS
             {
                 hide();
                 sendCommand("/gps".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 2)//Mochila
+            else if (actionId == 2) // Sac à dos / Inventaire
             {
                 hide();
                 if (activity instanceof SAMP) {
@@ -149,37 +152,37 @@ public class RadialMenu {
                 }
                 sendCommand("/m".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 3)//eloc(era TAB)
+            else if (actionId == 3) // Position / Localisation
             {
                 hide();
                 sendCommand("/eloc".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 4)//Propriedades
+            else if (actionId == 4) // Propriétés
             {
                 hide();
                 sendCommand("/casa".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 5)//Missoes
+            else if (actionId == 5) // Aide
             {
                 hide();
                 sendCommand("/ajuda".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 6)//Loja Vip
+            else if (actionId == 6) // Boutique VIP
             {
                 hide();
                 sendCommand("/loja".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 7)//Atendimento
+            else if (actionId == 7) // Assistance / ATM
             {
                 hide();
                 sendCommand("/atm".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 8)//Animacoes
+            else if (actionId == 8) // Animations / Émotes
             {
                 hide();
                 sendCommand("/anim".getBytes(StandardCharsets.UTF_8));
             }
-            if (actionId == 9)//Registro RG
+            else if (actionId == 9) // Identité
             {
                 hide();
                 sendCommand("/doc".getBytes(StandardCharsets.UTF_8));
@@ -188,16 +191,14 @@ public class RadialMenu {
     }
 
     public void show() {
-        if(!menuVisible && !RadialVehicles.menuVisibleV)
-        {
+        if (!menuVisible && !RadialVehicles.menuVisibleV) {
             Util.ShowLayout(radialLayout, true);
             menuVisible = true;
         }
     }
 
     public void hide() {
-        if(menuVisible)
-        {
+        if (menuVisible) {
             Util.HideLayout(radialLayout, true);
             menuVisible = false;
         }

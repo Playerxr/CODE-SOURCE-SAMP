@@ -155,7 +155,7 @@
                                 android:layout_marginTop="8dp"
                                 android:background="@drawable/launcher_field_surface_dark"
                                 android:fontFamily="@font/montserrat_bold"
-                                android:hint="AFRP Local Host"
+                                android:hint="Nova RP Local Host"
                                 android:imeOptions="actionNext|flagNoExtractUi"
                                 android:paddingStart="14dp"
                                 android:paddingEnd="14dp"
@@ -727,3 +727,4 @@
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
+

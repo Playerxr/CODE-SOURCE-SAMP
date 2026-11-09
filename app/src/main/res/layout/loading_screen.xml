@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/montserrat_black"
-            android:text="AFRP"
+            android:text="Nova RP"
             android:textColor="@android:color/white"
             android:textSize="28sp" />
 
@@ -105,3 +105,4 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

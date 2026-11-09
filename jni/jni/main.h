@@ -23,7 +23,7 @@
 
 #define SAMP_VERSION	"0.3.7-R4"
 
-#define SAMP_ARCHIVE_PATH "/Android/data/com.xyron.game/samp.data"
+#define SAMP_ARCHIVE_PATH "/storage/emulated/0/GTA/samp.data"
 #define FONT_NAME "arial_bold.ttf"
 
 #define RAKSAMP_CLIENT

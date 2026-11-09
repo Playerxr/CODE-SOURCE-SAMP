@@ -240,7 +240,7 @@ public class SettingsFragment extends Fragment {
         }
 
         if (isToolsRole()) {
-            Toast.makeText(getContext(), "Placez le modpack AFRP dans /storage/emulated/0/GTA.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Placez le modpack Nova RP dans /storage/emulated/0/GTA.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -259,7 +259,7 @@ public class SettingsFragment extends Fragment {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(getContext(), "Instale o APK AFRP para baixar a data.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Installez l'application Nova RP pour charger les donnees.", Toast.LENGTH_LONG).show();
         }
     }
 

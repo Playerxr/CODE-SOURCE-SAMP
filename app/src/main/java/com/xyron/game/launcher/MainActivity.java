@@ -166,7 +166,7 @@ public class MainActivity extends SampActivity {
             selectedOnline = isServerReachable(selectedServer);
         }
 
-        // Toujours autoriser le lancement pour NOVA AFRP meme si le ping UDP a du delai
+        // Toujours autoriser le lancement pour Nova RP meme si le ping UDP a du delai
         return LaunchPreparation.ready();
     }
 
@@ -218,7 +218,7 @@ public class MainActivity extends SampActivity {
     private void launchInstalledGameApk() {
         ServerConfigManager.ServerOption selectedServer = ServerConfigManager.getSelectedServer(this);
         if (selectedServer == null || !selectedServer.isValid()) {
-            Toast.makeText(this, "Adicione e selecione um servidor antes de abrir o game.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Selectionnez un serveur avant de lancer le jeu.", Toast.LENGTH_LONG).show();
             openTab(TAB_SETTINGS);
             return;
         }
@@ -236,7 +236,7 @@ public class MainActivity extends SampActivity {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "Instale o APK AFRP para entrar no servidor.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Installez l'application Nova RP pour entrer sur le serveur.", Toast.LENGTH_LONG).show();
         }
     }
 

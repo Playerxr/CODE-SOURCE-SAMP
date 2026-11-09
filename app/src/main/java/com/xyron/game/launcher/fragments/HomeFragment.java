@@ -186,7 +186,7 @@ public class HomeFragment extends Fragment {
             readinessBody.setText("Ouvrir avec le jeu");
             nextStepButton.setText("Ouvrir le jeu");
         } else {
-            readinessTitle.setText("NOVA AFRP");
+            readinessTitle.setText("Nova RP");
             readinessBody.setText("Pret a jouer");
             nextStepButton.setText("Jouer maintenant");
         }

@@ -23,7 +23,7 @@ public final class StorageHelper {
     /**
      * Retourne le dossier du jeu GTA (/storage/emulated/0/GTA ou /sdcard/GTA).
      * Correspond a la structure standard de Kuzia14 permettant aux joueurs de deposer
-     * manuellement le modpack NOVA AFRP directement dans ce repertoire.
+     * manuellement le modpack Nova RP directement dans ce repertoire.
      */
     public static File getGtaDirectory(Context context) {
         File gtaDir = new File(Environment.getExternalStorageDirectory(), GTA_FOLDER_NAME);

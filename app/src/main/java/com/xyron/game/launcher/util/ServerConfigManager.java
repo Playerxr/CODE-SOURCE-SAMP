@@ -16,7 +16,7 @@ import java.util.List;
 
 public final class ServerConfigManager {
     private static final String TAG = "ServerConfigManager";
-    private static final String PREFS_NAME = "afrp_server_manager";
+    private static final String PREFS_NAME = "novarp_server_manager";
     private static final String KEY_SAVED_SERVERS = "saved_servers";
     private static final String KEY_USER_ADDED = "userAdded";
     private static final int MAX_SAVED_SERVERS = 5;
@@ -268,7 +268,7 @@ public final class ServerConfigManager {
             Log.e(TAG, "Failed to parse saved servers", e);
         }
 
-        // Seed AFRP : si aucun serveur, injecte le serveur par defaut (Config).
+        // Seed Nova RP : si aucun serveur, injecte le serveur par defaut (Config).
         if (servers.isEmpty()) {
             try {
                 String defHost = com.xyron.game.launcher.data.Config.DEFAULT_SERVER_HOST;

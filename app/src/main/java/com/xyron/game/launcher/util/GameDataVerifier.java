@@ -35,15 +35,7 @@ public final class GameDataVerifier {
 
     public static boolean hasRequiredGameData(Context context) {
         File gtaDir = StorageHelper.getGtaDirectory(context);
-        if (checkDirectoryHasData(gtaDir)) {
-            return true;
-        }
-
-        if (context != null && context.getExternalFilesDir(null) != null) {
-            return checkDirectoryHasData(context.getExternalFilesDir(null));
-        }
-
-        return false;
+        return checkDirectoryHasData(gtaDir);
     }
 
     public static boolean checkDirectoryHasData(File baseDirectory) {
