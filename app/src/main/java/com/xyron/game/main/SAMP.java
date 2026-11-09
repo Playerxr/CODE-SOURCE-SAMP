@@ -397,9 +397,12 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                hud_main.setVisibility(View.GONE);
-                mDialog.hideWithoutReset();
-                mAttachEdit.hideWithoutReset();
+                if (hud_main != null)
+                    hud_main.setVisibility(View.GONE);
+                if (mDialog != null)
+                    mDialog.hideWithoutReset();
+                if (mAttachEdit != null)
+                    mAttachEdit.hideWithoutReset();
             }
         });
     }
@@ -409,11 +412,11 @@ public class SAMP extends com.raiferoleplay.game.game.SAMP implements CustomKeyb
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(iShowHud == 1)
+                if(iShowHud == 1 && hud_main != null)
                     hud_main.setVisibility(View.VISIBLE);
-                if(mAttachEdit.isShow)
+                if(mAttachEdit != null && mAttachEdit.isShow)
                     mAttachEdit.showWithoutReset();
-                if(mDialog.isShow)
+                if(mDialog != null && mDialog.isShow)
                     mDialog.showWithOldContent();
             }
         });
